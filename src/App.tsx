@@ -260,6 +260,7 @@ function App() {
           <motion.h2
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
             className="text-4xl font-bold text-center mb-16"
           >
             Our Technology Stack
@@ -270,8 +271,12 @@ function App() {
                 key={index}
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "-100px" }}
                 whileHover={{ y: -10 }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ 
+                  duration: 0.5,
+                  delay: index * 0.1 
+                }}
                 className="glass-card p-6 rounded-xl text-center group"
               >
                 <div className="mb-4 text-white relative">
@@ -291,6 +296,7 @@ function App() {
           <motion.h2 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
             className="text-4xl font-bold text-center mb-16"
           >
             What Drives Us
@@ -317,7 +323,11 @@ function App() {
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ 
+                  duration: 0.5,
+                  delay: index * 0.2 
+                }}
                 whileHover={{ scale: 1.05 }}
                 className="gradient-border group"
               >
@@ -345,6 +355,7 @@ function App() {
           <motion.h2 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
             className="text-4xl font-bold text-center mb-16"
           >
             Our Work in Action
@@ -377,6 +388,7 @@ function App() {
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
                 whileHover={{ 
                   scale: 1.02,
                   rotateY: 5,
@@ -385,7 +397,8 @@ function App() {
                 transition={{ 
                   type: "spring",
                   stiffness: 300,
-                  damping: 20
+                  damping: 20,
+                  duration: 0.5
                 }}
                 className="project-card relative group perspective-1000"
               >
@@ -425,6 +438,7 @@ function App() {
             className="text-center mt-16"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{ delay: 0.2 }}
           >
             <motion.button 
