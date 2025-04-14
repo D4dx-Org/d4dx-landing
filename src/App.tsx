@@ -140,13 +140,13 @@ function App() {
                   {item}
                 </motion.a>
               ))}
-              <motion.button
+              <motion.a
                 whileHover={{ scale: 1.05 }}
-                onClick={handleGetStartedClick}
-                className="px-6 py-2 bg-navy rounded-full font-medium"
+                href="tel:+919895804006"
+                className="px-6 py-2 bg-navy rounded-full font-medium flex items-center gap-2"
               >
-                Get Started
-              </motion.button>
+                <Phone size={18} /> Call Us
+              </motion.a>
             </div>
             <button 
               className="md:hidden"
@@ -178,10 +178,10 @@ function App() {
               ))}
               <motion.button
                 whileHover={{ scale: 1.05 }}
-                onClick={handleGetStartedClick}
-                className="px-6 py-2 bg-navy rounded-full font-medium w-fit"
+                onClick={() => window.location.href = 'tel:+919895804006'}
+                className="px-6 py-2 bg-navy rounded-full font-medium w-fit flex items-center gap-2"
               >
-                Get Started
+                <Phone size={18} /> Call Us
               </motion.button>
             </div>
           </div>
@@ -512,7 +512,7 @@ function App() {
               </div>
               <div className="flex items-center gap-4">
                 <Phone className="text-navy" />
-                <a href="tel:+1234567890" className="hover-glow">+1 (234) 567-890</a>
+                <a href="tel:+919895804006" className="hover-glow">+91 98958 04006</a>
               </div>
               <div className="flex items-center gap-4">
                 <MapPin className="text-navy" />

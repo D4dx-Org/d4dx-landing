@@ -4,6 +4,150 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Base responsive container */
+.container {
+  @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+}
+
+/* Responsive Typography */
+html {
+  font-size: 16px;
+  @apply antialiased;
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+/* Responsive spacing utilities */
+.section-padding {
+  @apply py-12 md:py-16 lg:py-20;
+}
+
+.section-margin {
+  @apply my-8 md:my-12 lg:my-16;
+}
+
+/* Responsive grid system */
+.grid-responsive {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8;
+}
+
+/* Responsive navigation */
+.nav-menu {
+  @apply flex flex-col md:flex-row items-center gap-4 md:gap-8;
+}
+
+/* Responsive images */
+.responsive-image {
+  @apply w-full h-auto object-cover;
+}
+
+/* Responsive text alignment */
+.text-responsive {
+  @apply text-left md:text-center;
+}
+
+/* Responsive buttons */
+.btn {
+  @apply px-4 md:px-6 py-2 md:py-3 text-sm md:text-base rounded-full transition-all duration-300;
+}
+
+/* Responsive cards */
+.card {
+  @apply p-4 md:p-6 rounded-lg shadow-lg;
+}
+
+/* Responsive hero section */
+.hero-section {
+  @apply min-h-[60vh] md:min-h-[80vh] flex items-center;
+}
+
+/* Responsive form elements */
+.form-input {
+  @apply w-full px-4 py-2 rounded-lg border focus:ring-2 focus:ring-navy focus:border-transparent;
+}
+
+/* Mobile menu styles */
+.mobile-menu {
+  @apply fixed top-0 left-0 w-full h-full bg-black bg-opacity-90 transform transition-transform duration-300 ease-in-out;
+}
+
+.mobile-menu.hidden {
+  @apply -translate-x-full;
+}
+
+/* Responsive portfolio grid */
+.portfolio-grid {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8;
+}
+
+/* Responsive tech stack grid */
+.tech-stack-grid {
+  @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4;
+}
+
+/* Responsive footer */
+.footer {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 py-12 md:py-16;
+}
+
+/* Custom scrollbar for better mobile experience */
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-navy rounded-full;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus styles for accessibility */
+:focus {
+  @apply outline-none ring-2 ring-navy ring-opacity-50;
+}
+
+/* Touch target sizes for mobile */
+.touch-target {
+  @apply min-h-[44px] min-w-[44px];
+}
+
+/* Responsive animations */
+@media (prefers-reduced-motion: no-preference) {
+  .animate-fade-in {
+    @apply opacity-0 animate-[fadeIn_0.5s_ease-in_forwards];
+  }
+  
+  .animate-slide-up {
+    @apply translate-y-4 opacity-0 animate-[slideUp_0.5s_ease-out_forwards];
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #000;
+    --text-primary: #fff;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none;
+  }
+}
+
 :root {
   --navy-blue: #0a2540;
 }
@@ -56,12 +200,6 @@ body {
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-}
-
-.tech-stack-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 2rem;
 }
 
