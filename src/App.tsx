@@ -298,17 +298,17 @@ function App() {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                icon: <Globe2 className="w-12 h-12 text-navy" />,
+                icon: <Globe2 className="w-12 h-12 text-blue-500" />,
                 title: "Innovation First",
                 description: "We don't follow trends. We create them."
               },
               {
-                icon: <Users className="w-12 h-12 text-navy" />,
+                icon: <Users className="w-12 h-12 text-purple-500" />,
                 title: "People-Centered",
                 description: "Human experience is at the core of our code."
               },
               {
-                icon: <Zap className="w-12 h-12 text-navy" />,
+                icon: <Zap className="w-12 h-12 text-amber-500" />,
                 title: "Future-Proofing",
                 description: "We future-ready every solution."
               }
@@ -319,12 +319,15 @@ function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.2 }}
                 whileHover={{ scale: 1.05 }}
-                className="gradient-border"
+                className="gradient-border group"
               >
-                <div className="glass-card p-8 rounded-2xl text-center h-full">
-                  <div className="mb-6">{value.icon}</div>
-                  <h3 className="text-2xl font-semibold mb-4">{value.title}</h3>
-                  <p className="text-gray-400">{value.description}</p>
+                <div className="glass-card p-8 rounded-2xl text-center h-full relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                  <div className="relative z-10">
+                    <div className="mb-6 transform transition-transform duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]">{value.icon}</div>
+                    <h3 className="text-2xl font-semibold mb-4">{value.title}</h3>
+                    <p className="text-gray-400">{value.description}</p>
+                  </div>
                 </div>
               </motion.div>
             ))}
