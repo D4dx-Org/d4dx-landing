@@ -304,42 +304,42 @@ export default function App() {
         <div className="portfolio-grid">
           {[
             {
-              image: "https://i.ibb.co/VxKN3Rj/muhasabah.jpg",
+              image: "https://cdn.dribbble.com/userupload/10599580/file/original-0c14504b38c5b67ff867c8ce92697088.png?resize=1200x900",
               title: "Muhasabah",
               description: "Daily self-reflection and spiritual tracking app",
               tech: ["React Native", "Firebase", "Node.js"],
               link: "https://example.com/muhasabah"
             },
             {
-              image: "https://i.ibb.co/CwLLxHD/tafheem.jpg",
+              image: "https://cdn.dribbble.com/userupload/10617130/file/original-5758b139cee8f24fae1f2abe4c3bc56c.png?resize=1200x900",
               title: "Thafheem ul Quran",
               description: "Comprehensive Quran study and translation platform",
               tech: ["Flutter", "GraphQL", "MongoDB"],
               link: "https://example.com/tafheem"
             },
             {
-              image: "https://i.ibb.co/xGV3W7P/quran-malayalam.jpg",
+              image: "https://cdn.dribbble.com/userupload/10617026/file/original-6963fb662a289c0bd6c2df1d49c48e8f.png?resize=1200x900",
               title: "Al Quran Malayalam",
               description: "Malayalam translation and tafseer of the Quran",
               tech: ["React", "Express", "MySQL"],
               link: "https://example.com/quran-malayalam"
             },
             {
-              image: "https://i.ibb.co/Jk8Gx3Q/janaza.jpg",
+              image: "https://cdn.dribbble.com/userupload/10617026/file/original-6963fb662a289c0bd6c2df1d49c48e8f.png?resize=1200x900",
               title: "Janaza Guide",
               description: "Step-by-step guide for Islamic funeral rites",
               tech: ["React Native", "Redux", "Firebase"],
               link: "https://example.com/janaza-guide"
             },
             {
-              image: "https://i.ibb.co/VpzB0Vk/lalithasaram.jpg",
+              image: "https://cdn.dribbble.com/userupload/10617026/file/original-6963fb662a289c0bd6c2df1d49c48e8f.png?resize=1200x900",
               title: "Quran Lalithasaram",
               description: "Simplified Quran learning platform in Malayalam",
               tech: ["Flutter", "Node.js", "PostgreSQL"],
               link: "https://example.com/lalithasaram"
             },
             {
-              image: "https://i.ibb.co/0MKznx8/hajj-guide.jpg",
+              image: "https://cdn.dribbble.com/userupload/10617026/file/original-6963fb662a289c0bd6c2df1d49c48e8f.png?resize=1200x900",
               title: "Thanima Hajj Guide",
               description: "Complete Hajj and Umrah companion app",
               tech: ["React Native", "Express", "MongoDB"],
@@ -412,23 +412,15 @@ export default function App() {
       {/* Contact Section */}
       <section className="section-padding container" id="contact">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Get in Touch</h2>
-        <div className="grid md:grid-cols-2 gap-8 items-start">
-          <div className="space-y-6">
-            <div className="flex items-center gap-4">
-              <Phone className="text-navy" />
-              <a href="tel:+919895804006" className="hover-glow">+91 98958 04006</a>
-            </div>
-            <div className="flex items-center gap-4">
-              <MapPin className="text-navy" />
-              <span>Calicut, Kerala, India</span>
-            </div>
+        <div className="max-w-xl mx-auto space-y-6">
+          <div className="flex items-center gap-4">
+            <Phone className="text-white" />
+            <a href="tel:+919895804006" className="hover:text-white transition-colors">+91 98958 04006</a>
           </div>
-          <form className="space-y-6">
-            <input type="text" placeholder="Your Name" className="form-input" />
-            <input type="email" placeholder="Your Email" className="form-input" />
-            <textarea rows={4} placeholder="Your Message" className="form-input" />
-            <button type="submit" className="btn bg-navy w-full">Send Message</button>
-          </form>
+          <div className="flex items-center gap-4">
+            <MapPin className="text-white" />
+            <span>Calicut, Kerala, India</span>
+          </div>
         </div>
       </section>
 
