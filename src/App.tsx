@@ -26,7 +26,7 @@ const Logo = () => (
   </motion.div>
 );
 
-export default function App() {
+function App() {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
@@ -118,82 +118,119 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black to-navy text-white">
+    <div className="min-h-screen bg-black text-white">
       {/* Navigation */}
-      <nav className="container fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-90 backdrop-blur-sm">
-        <div className="flex justify-between items-center py-4">
-          <Logo />
-          <div className="hidden md:flex items-center gap-8">
-            {['Services', 'Work', 'About', 'Contact'].map((item) => (
-              <motion.a
-                key={item}
-                onClick={() => scrollToSection(item.toLowerCase())}
-                whileHover={{ scale: 1.1 }}
-                className="hover:text-white transition-all cursor-pointer"
-              >
-                {item}
-              </motion.a>
-            ))}
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              href="tel:+919895804006"
-              className="btn bg-navy"
+      <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'floating-nav py-4' : 'py-6'}`}>
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between">
+            <motion.div 
+              onClick={() => scrollToSection('hero')}
+              className="cursor-pointer"
             >
-              <Phone size={18} /> Call Us
-            </motion.a>
+              <Logo />
+            </motion.div>
+            <div className="hidden md:flex items-center gap-8">
+              {['Services', 'Work', 'About', 'Contact'].map((item) => (
+                <motion.a
+                  key={item}
+                  onClick={() => scrollToSection(item.toLowerCase())}
+                  whileHover={{ scale: 1.1 }}
+                  className={`hover:text-white hover:font-bold transition-all cursor-pointer ${activeSection === item.toLowerCase() ? 'text-gray-400' : ''}`}
+                >
+                  {item}
+                </motion.a>
+              ))}
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                href="tel:+919895804006"
+                className="px-6 py-2 bg-navy rounded-full font-medium flex items-center gap-2"
+              >
+                <Phone size={18} /> Call Us
+              </motion.a>
+            </div>
+            <button 
+              className="md:hidden"
+              onClick={() => setIsNavOpen(!isNavOpen)}
+            >
+              {isNavOpen ? <X /> : <Menu />}
+            </button>
           </div>
-          <button className="md:hidden touch-target" onClick={() => setIsNavOpen(!isNavOpen)}>
-            <Menu size={24} />
-          </button>
         </div>
       </nav>
 
-      {/* Mobile Menu */}
-      <div className={`mobile-menu ${isNavOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-        <div className="container py-20">
-          <div className="nav-menu">
-            {['Services', 'Work', 'About', 'Contact'].map((item) => (
-              <motion.a
-                key={item}
-                onClick={() => {
-                  scrollToSection(item.toLowerCase());
-                  setIsNavOpen(false);
-                }}
-                className="text-xl hover:text-white transition-all cursor-pointer"
+      {/* Mobile Navigation */}
+      {isNavOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="fixed inset-0 bg-black z-40 pt-20"
+        >
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col gap-6">
+              {['Services', 'Work', 'About', 'Contact'].map((item) => (
+                <a
+                  key={item}
+                  onClick={() => scrollToSection(item.toLowerCase())}
+                  className={`text-2xl font-medium hover:text-white hover:font-bold transition-all cursor-pointer ${activeSection === item.toLowerCase() ? 'text-gray-400' : ''}`}
+                >
+                  {item}
+                </a>
+              ))}
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                onClick={() => window.location.href = 'tel:+919895804006'}
+                className="px-6 py-2 bg-navy rounded-full font-medium w-fit flex items-center gap-2"
               >
-                {item}
-              </motion.a>
-            ))}
-            <motion.a
-              href="tel:+919895804006"
-              className="btn bg-navy w-full text-center"
-            >
-              <Phone size={18} className="inline-block mr-2" /> Call Us
-            </motion.a>
+                <Phone size={18} /> Call Us
+              </motion.button>
+            </div>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      )}
 
       {/* Hero Section */}
-      <section className="hero-section container">
-        <div className="text-responsive max-w-4xl mx-auto">
-          <motion.h1 
-            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+      <section id="hero" className="relative h-screen flex items-center justify-center overflow-hidden bg-black">
+        <HeroBackground />
+        <motion.div 
+          style={{ opacity }}
+          className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black pointer-events-none"
+        />
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="container mx-auto px-4 text-center z-10 relative"
+        >
+          <motion.div
+            initial={{ scale: 0.8 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 1 }}
+            className="mb-8"
           >
-            Engineering Bold Digital Futures
-          </motion.h1>
-          <motion.p 
-            className="text-lg md:text-xl text-gray-300 mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            We transform ideas into powerful digital solutions
-          </motion.p>
-        </div>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white">
+              Engineering Bold <span className="text-gradient">Digital Futures</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
+              We design, build and elevate experiences that power the future.
+            </p>
+          </motion.div>
+          <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              onClick={handleExploreWorkClick}
+              className="px-8 py-3 bg-navy rounded-full font-medium flex items-center gap-2 hover:glow w-full md:w-auto"
+            >
+              Explore Our Work <ArrowRight size={20} />
+            </motion.button>
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              onClick={handleContactClick}
+              className="px-8 py-3 border border-white/20 rounded-full font-medium hover:bg-white/10 w-full md:w-auto"
+            >
+              Contact Us
+            </motion.button>
+          </div>
+        </motion.div>
       </section>
 
       {/* Stats Section */}
@@ -217,29 +254,38 @@ export default function App() {
       </section>
 
       {/* Tech Stack Section */}
-      <section className="section-padding container" id="services">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Our Tech Stack</h2>
-        <div className="tech-stack-grid">
-          {techStack.map((tech, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-100px" }}
-              whileHover={{ y: -10 }}
-              transition={{ 
-                duration: 0.5,
-                delay: index * 0.1 
-              }}
-              className="glass-card p-6 rounded-xl text-center group"
-            >
-              <div className="mb-4 text-white relative">
-                <div className="absolute inset-0 animate-gradient-x bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></div>
-                <div className="relative z-10 text-2xl">{tech.icon}</div>
-              </div>
-              <p className="font-medium">{tech.label}</p>
-            </motion.div>
-          ))}
+      <section className="py-24 px-4 bg-navy/5">
+        <div className="container mx-auto">
+          <motion.h2
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            className="text-4xl font-bold text-center mb-16"
+          >
+            Our Technology Stack
+          </motion.h2>
+          <div className="tech-stack-grid">
+            {techStack.map((tech, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ y: -10 }}
+                transition={{ 
+                  duration: 0.5,
+                  delay: index * 0.1 
+                }}
+                className="glass-card p-6 rounded-xl text-center group"
+              >
+                <div className="mb-4 text-white relative">
+                  <div className="absolute inset-0 animate-gradient-x bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></div>
+                  <div className="relative z-10 text-2xl">{tech.icon}</div>
+                </div>
+                <p className="font-medium">{tech.label}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -299,102 +345,133 @@ export default function App() {
       </section>
 
       {/* Portfolio Section */}
-      <section className="section-padding container" id="work">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Our Work in Action</h2>
-        <div className="portfolio-grid">
-          {[
-            {
-              image: "https://cdn.dribbble.com/userupload/10599580/file/original-0c14504b38c5b67ff867c8ce92697088.png?resize=1200x900",
-              title: "Muhasabah",
-              description: "Daily self-reflection and spiritual tracking app",
-              tech: ["React Native", "Firebase", "Node.js"],
-              link: "https://example.com/muhasabah"
-            },
-            {
-              image: "https://cdn.dribbble.com/userupload/10617130/file/original-5758b139cee8f24fae1f2abe4c3bc56c.png?resize=1200x900",
-              title: "Thafheem ul Quran",
-              description: "Comprehensive Quran study and translation platform",
-              tech: ["Flutter", "GraphQL", "MongoDB"],
-              link: "https://example.com/tafheem"
-            },
-            {
-              image: "https://cdn.dribbble.com/userupload/10617026/file/original-6963fb662a289c0bd6c2df1d49c48e8f.png?resize=1200x900",
-              title: "Al Quran Malayalam",
-              description: "Malayalam translation and tafseer of the Quran",
-              tech: ["React", "Express", "MySQL"],
-              link: "https://example.com/quran-malayalam"
-            },
-            {
-              image: "https://cdn.dribbble.com/userupload/10617026/file/original-6963fb662a289c0bd6c2df1d49c48e8f.png?resize=1200x900",
-              title: "Janaza Guide",
-              description: "Step-by-step guide for Islamic funeral rites",
-              tech: ["React Native", "Redux", "Firebase"],
-              link: "https://example.com/janaza-guide"
-            },
-            {
-              image: "https://cdn.dribbble.com/userupload/10617026/file/original-6963fb662a289c0bd6c2df1d49c48e8f.png?resize=1200x900",
-              title: "Quran Lalithasaram",
-              description: "Simplified Quran learning platform in Malayalam",
-              tech: ["Flutter", "Node.js", "PostgreSQL"],
-              link: "https://example.com/lalithasaram"
-            },
-            {
-              image: "https://cdn.dribbble.com/userupload/10617026/file/original-6963fb662a289c0bd6c2df1d49c48e8f.png?resize=1200x900",
-              title: "Thanima Hajj Guide",
-              description: "Complete Hajj and Umrah companion app",
-              tech: ["React Native", "Express", "MongoDB"],
-              link: "https://example.com/hajj-guide"
-            }
-          ].map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              whileHover={{ 
-                scale: 1.02,
-                rotateY: 5,
-                translateZ: 20 
-              }}
-              transition={{ 
-                type: "spring",
-                stiffness: 300,
-                damping: 20,
-                duration: 0.5
-              }}
-              className="project-card relative group perspective-1000"
-            >
-              <div className="overflow-hidden rounded-2xl bg-navy/20 backdrop-blur-sm border border-white/10 transition-all duration-500 group-hover:border-white/20 group-hover:shadow-2xl group-hover:shadow-blue-500/20">
-                <div className="aspect-video relative">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-                    <h3 className="text-xl font-semibold mb-2 text-white">{project.title}</h3>
-                    <p className="text-gray-300 mb-4 text-sm">{project.description}</p>
-                    <div className="flex gap-2 mb-4">
-                      {project.tech.map((tech, i) => (
-                        <span key={i} className="text-xs px-2 py-1 rounded-full bg-white/10 text-white/80">
-                          {tech}
-                        </span>
-                      ))}
+      <section id="work" className="py-24 px-4 bg-gradient-to-b from-black via-navy/5 to-black relative overflow-hidden">
+        {/* Background lighting effect */}
+        <div className="absolute inset-0 bg-grid-white/5 bg-grid-pattern"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 animate-gradient-x"></div>
+        
+        <div className="container mx-auto relative z-10">
+          <motion.h2 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            className="text-4xl font-bold text-center mb-16"
+          >
+            Our Work in Action
+          </motion.h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                image: "https://cdn.dribbble.com/userupload/13133188/file/original-2339f4f0d29ff98c83c3f9dbf3c1234f.png?resize=1200x900",
+                title: "Muhasabah",
+                description: "Daily self-reflection and spiritual tracking app",
+                tech: ["React Native", "Firebase", "Node.js"],
+                link: "https://example.com/muhasabah"
+              },
+              {
+                image: "https://cdn.dribbble.com/userupload/13133188/file/original-1233f4f0d29ff98c83c3f9dbf3c1234f.png?resize=1200x900",
+                title: "Thafheem ul Quran",
+                description: "Comprehensive Quran study and translation platform",
+                tech: ["Flutter", "GraphQL", "MongoDB"],
+                link: "https://example.com/tafheem"
+              },
+              {
+                image: "https://cdn.dribbble.com/userupload/13133188/file/original-5679f4f0d29ff98c83c3f9dbf3c1234f.png?resize=1200x900",
+                title: "Al Quran Malayalam",
+                description: "Malayalam translation and tafseer of the Quran",
+                tech: ["React", "Express", "MySQL"],
+                link: "https://example.com/quran-malayalam"
+              },
+              {
+                image: "https://cdn.dribbble.com/userupload/13133188/file/original-5679f4f0d29ff98c83c3f9dbf3c1234f.png?resize=1200x900",
+                title: "Janaza Guide",
+                description: "Step-by-step guide for Islamic funeral rites",
+                tech: ["React Native", "Redux", "Firebase"],
+                link: "https://example.com/janaza-guide"
+              },
+              {
+                image: "https://cdn.dribbble.com/userupload/13133188/file/original-5679f4f0d29ff98c83c3f9dbf3c1234f.png?resize=1200x900",
+                title: "Quran Lalithasaram",
+                description: "Simplified Quran learning platform in Malayalam",
+                tech: ["Flutter", "Node.js", "PostgreSQL"],
+                link: "https://example.com/lalithasaram"
+              },
+              {
+                image: "https://cdn.dribbble.com/userupload/13133188/file/original-5679f4f0d29ff98c83c3f9dbf3c1234f.png?resize=1200x900",
+                title: "Thanima Hajj Guide",
+                description: "Complete Hajj and Umrah companion app",
+                tech: ["React Native", "Express", "MongoDB"],
+                link: "https://example.com/hajj-guide"
+              }
+            ].map((project, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{ 
+                  scale: 1.02,
+                  rotateY: 5,
+                  translateZ: 20 
+                }}
+                transition={{ 
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 20,
+                  duration: 0.5
+                }}
+                className="project-card relative group perspective-1000"
+              >
+                <div className="overflow-hidden rounded-2xl bg-navy/20 backdrop-blur-sm border border-white/10 transition-all duration-500 group-hover:border-white/20 group-hover:shadow-2xl group-hover:shadow-blue-500/20">
+                  <div className="aspect-video relative">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                    <img 
+                      src={project.image} 
+                      alt={project.title}
+                      className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
+                      <h3 className="text-xl font-semibold mb-2 text-white">{project.title}</h3>
+                      <p className="text-gray-300 mb-4 text-sm">{project.description}</p>
+                      <div className="flex gap-2 mb-4">
+                        {project.tech.map((tech, i) => (
+                          <span key={i} className="text-xs px-2 py-1 rounded-full bg-white/10 text-white/80">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                      <a 
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-gray-300 hover:text-white hover:font-bold transition-all group-hover:translate-x-2"
+                      >
+                        View Project <ArrowRight size={16} className="transform transition-transform group-hover:translate-x-1" />
+                      </a>
                     </div>
-                    <a 
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-gray-300 hover:text-white hover:font-bold transition-all group-hover:translate-x-2"
-                    >
-                      View Project <ArrowRight size={16} className="transform transition-transform group-hover:translate-x-1" />
-                    </a>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
+          <motion.div 
+            className="text-center mt-16"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ delay: 0.2 }}
+          >
+            <motion.button 
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: "0 0 20px rgba(59, 130, 246, 0.5)"
+              }}
+              onClick={handlePortfolioClick}
+              className="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-800 rounded-full font-medium inline-flex items-center gap-2 hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300"
+            >
+              View Full Portfolio <ArrowRight size={20} />
+            </motion.button>
+          </motion.div>
         </div>
       </section>
 
@@ -410,35 +487,109 @@ export default function App() {
       </section>
 
       {/* Contact Section */}
-      <section className="section-padding container" id="contact">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Get in Touch</h2>
-        <div className="max-w-xl mx-auto space-y-6">
-          <div className="flex items-center gap-4">
-            <Phone className="text-white" />
-            <a href="tel:+919895804006" className="hover:text-white transition-colors">+91 98958 04006</a>
-          </div>
-          <div className="flex items-center gap-4">
-            <MapPin className="text-white" />
-            <span>Calicut, Kerala, India</span>
-          </div>
+      <section id="contact" className="py-24 px-4 tech-grid relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black"></div>
+        <div className="container mx-auto relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold mb-4">Let's Build Something Legendary</h2>
+            <p className="text-xl text-gray-400">
+              Reach out to collaborate, brainstorm, or connect with the D4DX team.
+            </p>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="glass-card max-w-2xl mx-auto p-8 rounded-2xl"
+          >
+            <div className="grid gap-6">
+              <div className="flex items-center gap-4">
+                <Mail className="text-navy" />
+                <a href="mailto:contact@d4dx.com" className="hover-glow">contact@d4dx.com</a>
+              </div>
+              <div className="flex items-center gap-4">
+                <Phone className="text-navy" />
+                <a href="tel:+919895804006" className="hover-glow">+91 98958 04006</a>
+              </div>
+              <div className="flex items-center gap-4">
+                <MapPin className="text-navy" />
+                <span>Calicut, Kerala, India</span>
+              </div>
+            </div>
+            <div className="flex justify-center gap-6 mt-8">
+              <motion.a
+                whileHover={{ scale: 1.2 }}
+                onClick={() => handleSocialClick('linkedin')}
+                className="text-gray-400 hover:text-white transition-colors cursor-pointer"
+              >
+                <Linkedin size={24} />
+              </motion.a>
+              <motion.a
+                whileHover={{ scale: 1.2 }}
+                onClick={() => handleSocialClick('instagram')}
+                className="text-gray-400 hover:text-white transition-colors cursor-pointer"
+              >
+                <Instagram size={24} />
+              </motion.a>
+              <motion.a
+                whileHover={{ scale: 1.2 }}
+                onClick={() => handleSocialClick('github')}
+                className="text-gray-400 hover:text-white transition-colors cursor-pointer"
+              >
+                <Github size={24} />
+              </motion.a>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="footer container border-t border-gray-800">
-        <div className="text-sm text-gray-400">
-          © 2024 D4DX Innovations. All rights reserved.
-        </div>
-        <div className="flex justify-end gap-4">
-          <a href="https://linkedin.com/company/d4dx" target="_blank" rel="noopener noreferrer" className="hover:text-white">
-            <Linkedin size={20} />
-          </a>
-          <a href="https://instagram.com/d4dx" target="_blank" rel="noopener noreferrer" className="hover:text-white">
-            <Instagram size={20} />
-          </a>
-          <a href="https://github.com/d4dx" target="_blank" rel="noopener noreferrer" className="hover:text-white">
-            <Github size={20} />
-          </a>
+      {/* Copyright Section */}
+      <footer className="py-8 px-4 border-t border-white/10 bg-black/50 backdrop-blur-sm">
+        <div className="container mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="flex items-center gap-2">
+              <Logo />
+              <div className="h-4 w-px bg-white/20 mx-4"></div>
+              <p className="text-sm text-gray-400">
+                © {new Date().getFullYear()} D4DX. All rights reserved.
+              </p>
+            </div>
+            <div className="flex items-center gap-6">
+              <motion.a
+                href="/privacy"
+                whileHover={{ scale: 1.05 }}
+                className="text-sm text-gray-400 hover:text-white transition-colors"
+              >
+                Privacy Policy
+              </motion.a>
+              <motion.a
+                href="/terms"
+                whileHover={{ scale: 1.05 }}
+                className="text-sm text-gray-400 hover:text-white transition-colors"
+              >
+                Terms of Service
+              </motion.a>
+              <div className="h-4 w-px bg-white/20"></div>
+              <motion.p
+                initial={{ opacity: 0.8 }}
+                whileHover={{ opacity: 1 }}
+                className="text-sm text-gray-500"
+              >
+                Designed & Built by{' '}
+                <a 
+                  href="https://github.com/d4dx" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:text-blue-300 transition-colors"
+                >
+                  D4DX Innovations
+                </a>
+              </motion.p>
+            </div>
+          </div>
         </div>
       </footer>
 
@@ -451,3 +602,5 @@ export default function App() {
     </div>
   );
 }
+
+export default App;
