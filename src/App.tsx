@@ -13,17 +13,16 @@ const Logo = () => (
     animate={{ opacity: 1 }}
     className="flex items-center gap-2"
   >
-    <motion.div
-      whileHover={{ scale: 1.1 }}
-      className="relative w-8 h-8"
-    >
-      <div className="absolute inset-0 bg-navy rounded-lg transform rotate-45"></div>
-      <div className="absolute inset-0 bg-gradient-to-tr from-white to-transparent opacity-20 rounded-lg transform rotate-45"></div>
-      <div className="absolute inset-[2px] bg-black rounded-lg transform rotate-45 flex items-center justify-center">
-        <span className="text-white font-bold transform -rotate-45">D4</span>
-      </div>
+    <motion.div className="relative">
+      <motion.img
+        src="https://d4dx.co/wp-content/smush-webp/2024/10/Logo-final-copy-01-e1728989068232-2048x647.png.webp"
+        alt="D4DX Logo"
+        className="h-8 md:h-10 w-auto brightness-0 invert filter hover:brightness-110 transition-all duration-300"
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 0.2 }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 animate-gradient-x pointer-events-none"></div>
     </motion.div>
-    <span className="text-xl font-bold">D4DX</span>
   </motion.div>
 );
 
@@ -363,25 +362,46 @@ function App() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                image: "https://cdn.dribbble.com/userupload/10599580/file/original-0c14504b38c5b67ff867c8ce92697088.png?resize=1200x900",
-                title: "AI Analytics Dashboard",
-                description: "Real-time data visualization platform",
-                tech: ["React", "D3.js", "TensorFlow"],
-                link: "https://example.com/project1"
+                image: "https://cdn.dribbble.com/userupload/13133188/file/original-2339f4f0d29ff98c83c3f9dbf3c1234f.png?resize=1200x900",
+                title: "Muhasabah",
+                description: "Daily self-reflection and spiritual tracking app",
+                tech: ["React Native", "Firebase", "Node.js"],
+                link: "https://example.com/muhasabah"
               },
               {
-                image: "https://cdn.dribbble.com/userupload/10617130/file/original-5758b139cee8f24fae1f2abe4c3bc56c.png?resize=1200x900",
-                title: "Smart City Platform",
-                description: "IoT-based urban management system",
-                tech: ["Vue.js", "Node.js", "MongoDB"],
-                link: "https://example.com/project2"
+                image: "https://cdn.dribbble.com/userupload/13133188/file/original-1233f4f0d29ff98c83c3f9dbf3c1234f.png?resize=1200x900",
+                title: "Thafheem ul Quran",
+                description: "Comprehensive Quran study and translation platform",
+                tech: ["Flutter", "GraphQL", "MongoDB"],
+                link: "https://example.com/tafheem"
               },
               {
-                image: "https://cdn.dribbble.com/userupload/10617026/file/original-6963fb662a289c0bd6c2df1d49c48e8f.png?resize=1200x900",
-                title: "Quantum Computing Interface",
-                description: "Next-gen quantum system control",
-                tech: ["React", "WebGL", "Python"],
-                link: "https://example.com/project3"
+                image: "https://cdn.dribbble.com/userupload/13133188/file/original-5679f4f0d29ff98c83c3f9dbf3c1234f.png?resize=1200x900",
+                title: "Al Quran Malayalam",
+                description: "Malayalam translation and tafseer of the Quran",
+                tech: ["React", "Express", "MySQL"],
+                link: "https://example.com/quran-malayalam"
+              },
+              {
+                image: "https://cdn.dribbble.com/userupload/13133188/file/original-5679f4f0d29ff98c83c3f9dbf3c1234f.png?resize=1200x900",
+                title: "Janaza Guide",
+                description: "Step-by-step guide for Islamic funeral rites",
+                tech: ["React Native", "Redux", "Firebase"],
+                link: "https://example.com/janaza-guide"
+              },
+              {
+                image: "https://cdn.dribbble.com/userupload/13133188/file/original-5679f4f0d29ff98c83c3f9dbf3c1234f.png?resize=1200x900",
+                title: "Quran Lalithasaram",
+                description: "Simplified Quran learning platform in Malayalam",
+                tech: ["Flutter", "Node.js", "PostgreSQL"],
+                link: "https://example.com/lalithasaram"
+              },
+              {
+                image: "https://cdn.dribbble.com/userupload/13133188/file/original-5679f4f0d29ff98c83c3f9dbf3c1234f.png?resize=1200x900",
+                title: "Thanima Hajj Guide",
+                description: "Complete Hajj and Umrah companion app",
+                tech: ["React Native", "Express", "MongoDB"],
+                link: "https://example.com/hajj-guide"
               }
             ].map((project, index) => (
               <motion.div
@@ -496,7 +516,7 @@ function App() {
               </div>
               <div className="flex items-center gap-4">
                 <MapPin className="text-navy" />
-                <span>San Francisco, CA</span>
+                <span>Calicut, Kerala, India</span>
               </div>
             </div>
             <div className="flex justify-center gap-6 mt-8">
@@ -525,6 +545,53 @@ function App() {
           </motion.div>
         </div>
       </section>
+
+      {/* Copyright Section */}
+      <footer className="py-8 px-4 border-t border-white/10 bg-black/50 backdrop-blur-sm">
+        <div className="container mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="flex items-center gap-2">
+              <Logo />
+              <div className="h-4 w-px bg-white/20 mx-4"></div>
+              <p className="text-sm text-gray-400">
+                © {new Date().getFullYear()} D4DX. All rights reserved.
+              </p>
+            </div>
+            <div className="flex items-center gap-6">
+              <motion.a
+                href="/privacy"
+                whileHover={{ scale: 1.05 }}
+                className="text-sm text-gray-400 hover:text-white transition-colors"
+              >
+                Privacy Policy
+              </motion.a>
+              <motion.a
+                href="/terms"
+                whileHover={{ scale: 1.05 }}
+                className="text-sm text-gray-400 hover:text-white transition-colors"
+              >
+                Terms of Service
+              </motion.a>
+              <div className="h-4 w-px bg-white/20"></div>
+              <motion.p
+                initial={{ opacity: 0.8 }}
+                whileHover={{ opacity: 1 }}
+                className="text-sm text-gray-500"
+              >
+                Designed & Built by{' '}
+                <a 
+                  href="https://github.com/d4dx" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:text-blue-300 transition-colors"
+                >
+                  D4DX Innovations
+                </a>
+              </motion.p>
+            </div>
+          </div>
+        </div>
+      </footer>
 
       {/* Portfolio Grid Modal */}
       <AnimatePresence>
